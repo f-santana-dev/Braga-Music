@@ -1,1 +1,1 @@
-web: gunicorn BragaMusic.wsgi
+web: gunicorn BragaMusic.wsgi:application

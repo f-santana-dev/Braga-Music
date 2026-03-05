@@ -1,17 +1,31 @@
-# services:
-#   - type: web
-#     name: seu-nome-do-app
-#     runtime: python
-#     buildCommand: |
-#       pip install -r requirements.txt
-#       python manage.py makemigrations
-#       python manage.py migrate
-#       python instrumento/management_users.py  # Executa o script para criar o superusuário
-#     startCommand: gunicorn BragaMusic.wsgi:application
-#     envVars:
-#       - key: SECRET_KEY
-#         generateValue: true
-#       - key: DATABASE_URL
-#         value: "postgresql://neondb_owner:npg_diYvCe3O0oBV@ep-wild-mud-a5rr9e9x-pooler.us-east-2.aws.neon.tech/bragamusic_db?sslmode=require"
-#       - key: DEBUG
-#         value: "False"  # ou "True" para depuração # ou "True" para depuração
+services:
+  - type: web
+    name: braga-music
+    runtime: python
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate
+    startCommand: gunicorn BragaMusic.wsgi:application
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "braga-music.onrender.com"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://braga-music.onrender.com"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: braga-music-db
+          property: connectionString
+      - key: MERCADO_PAGO_PUBLIC_KEY
+        sync: false
+      - key: MERCADO_PAGO_ACCESS_TOKEN
+        sync: false
+
+databases:
+  - name: braga-music-db
+    databaseName: bragamusic
+    user: bragamusic_user
