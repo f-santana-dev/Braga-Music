@@ -1,13 +1,6 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
-
 .container-table {
-    max-width: 2100px;
-    width: 100%;
+    max-width: 1200px;
+    width: calc(100vw - 40px);
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
@@ -46,6 +39,7 @@ tr:hover {
 }
 
 .table-responsive {
+    width: 100%;
     overflow-x: auto;
 }
 

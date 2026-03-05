@@ -1,4 +1,4 @@
-import os
+﻿import os
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -13,7 +13,7 @@ def env_bool(key, default=False):
 
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-insecure-change-me")
-DEBUG = env_bool("DEBUG", False)
+DEBUG = env_bool("DJANGO_DEBUG", env_bool("DEBUG", False))
 ALLOWED_HOSTS = [host.strip() for host in os.environ.get("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",") if host.strip()]
 
 MERCADO_PAGO_PUBLIC_KEY = os.environ.get("MERCADO_PAGO_PUBLIC_KEY", "")
@@ -99,3 +99,4 @@ LOGGING = {
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

@@ -793,7 +793,7 @@ def finalizar_pedido(request):
     if payment_link:
         return redirect(payment_link)
     else:
-        return render(request, 'erro_pagamento.html')
+        return render(request, 'pagamento_erro.html')
 
 
 

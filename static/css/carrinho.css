@@ -9,13 +9,18 @@
 /* Contêiner do carrinho */
 /* Contêiner do carrinho */
 .carrinho-container {
-    width: 80%;
+    width: min(96vw, 1280px);
     margin: 20px auto;
     border: 1px solid #ddd;
     padding: 40px; /* Aumentei o padding */
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center; /* Centralizar o conteúdo */
+}
+
+.carrinho-tabela-wrapper {
+    width: 100%;
+    overflow-x: auto;
 }
 
 
@@ -31,6 +36,7 @@
 /* Tabela do carrinho */
 .carrinho-tabela {
     width: 100%;
+    min-width: 760px;
     border-collapse: collapse;
     margin-bottom: 25px;
     border-radius: 8px;

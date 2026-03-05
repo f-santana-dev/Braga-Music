@@ -1,7 +1,7 @@
-<!-- instrumento/templates/homepage.html -->
+﻿<!-- instrumento/templates/homepage.html -->
  
 {% extends 'base.html' %}
-{% load static %}
+{% load static %}`r`n{% load l10n %}
 
 <head>
     <title>BragaMusics</title>
@@ -51,11 +51,11 @@
             </div>
 
             <div class="filter-group">
-                <h4>Preço</h4>
+                <h4>PreÃ§o</h4>
                 <div class="price-filter">
                     <div id="slider-range"></div>
                     <p>
-                        <label for="amount">Intervalo de preço:</label>
+                        <label for="amount">Intervalo de preÃ§o:</label>
                         <input type="text" id="amount" readonly style="border: 0; color: #f6931f; font-weight: bold" />
                     </p>
                 </div>
@@ -75,9 +75,9 @@
         $(function () {
             $("#slider-range").slider({
                 range: true,
-                min: {{ preco_minimo_global }},
-                max: {{ preco_maximo_global }},
-                values: [{{ preco_min_selecionado|default:preco_minimo_global }}, {{ preco_max_selecionado|default:preco_maximo_global }}],
+                min: {{ preco_minimo_global|unlocalize }},
+                max: {{ preco_maximo_global|unlocalize }},
+                values: [{{ preco_min_selecionado|default:preco_minimo_global|unlocalize }}, {{ preco_max_selecionado|default:preco_maximo_global|unlocalize }}],
                 slide: function (event, ui) {
                     $("#amount").val(formatCurrency(ui.values[0]) + " - " + formatCurrency(ui.values[1]));
                 },
@@ -105,7 +105,7 @@
             if (cores.length > 0) cores.forEach(cor => url += 'cor=' + cor + '&');
             url += 'preco_min=' + precoMin + '&preco_max=' + precoMax;
     
-            // Remove o último '&' se existir
+            // Remove o Ãºltimo '&' se existir
             if (url.endsWith('&')) {
                 url = url.slice(0, -1);
             }
@@ -127,10 +127,10 @@
         $('.btn-clear-filters').click(function() {
             $('.categoria-filter').removeClass('active');
             $('.marca-filter, .cor-filter').prop('checked', false);
-            $("#slider-range").slider("values", [{{ preco_minimo_global }}, {{ preco_maximo_global }}]);
-            $("#amount").val(formatCurrency({{ preco_minimo_global }}) + " - " + formatCurrency({{ preco_maximo_global }}));
+            $("#slider-range").slider("values", [{{ preco_minimo_global|unlocalize }}, {{ preco_maximo_global|unlocalize }}]);
+            $("#amount").val(formatCurrency({{ preco_minimo_global|unlocalize }}) + " - " + formatCurrency({{ preco_maximo_global|unlocalize }}));
     
-            // Limpar a URL removendo os parâmetros de filtro
+            // Limpar a URL removendo os parÃ¢metros de filtro
             window.location.href = '?';
         });
     </script>

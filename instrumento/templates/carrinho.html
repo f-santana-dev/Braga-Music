@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 {% load static %}
 
 {% block head %}
@@ -11,14 +11,15 @@
     <h1 class="carrinho-titulo">Carrinho de Compras</h1>
 
     {% if itens_carrinho %}
+    <div class="carrinho-tabela-wrapper">
     <table class="carrinho-tabela">
         <thead>
             <tr>
                 <th>Produto</th>
-                <th>Preço</th>
+                <th>PreÃ§o</th>
                 <th>Quantidade</th>
                 <th>Total</th>
-                <th>Ações</th>
+                <th>AÃ§Ãµes</th>
             </tr>
         </thead>
         <tbody>
@@ -51,13 +52,14 @@
             </tr>
         </tfoot>
     </table>
+    </div>
     <div class="finalizar-compra">
         <a href="{% url 'homepage' %}" class="continuar-comprando">Continuar Comprando</a>
         <a href="{% url 'finalizar_pedido' %}" class="finalizar-pedido">Finalizar Pedido</a>
     </div>
     {% else %}
     
-        <p class="carrinho-vazio-mensagem">Seu carrinho está vazio.</p>
+        <p class="carrinho-vazio-mensagem">Seu carrinho estÃ¡ vazio.</p>
         <a href="{% url 'homepage' %}" class="continuar-comprando-vazio">Continuar Comprando</a>
     {% endif %}
 </div>
