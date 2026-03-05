@@ -1,0 +1,212 @@
+/* Estilos globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Contêiner do carrinho */
+/* Contêiner do carrinho */
+.carrinho-container {
+    width: 80%;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    padding: 40px; /* Aumentei o padding */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centralizar o conteúdo */
+}
+
+
+/* Título do carrinho */
+.carrinho-titulo {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Tabela do carrinho */
+.carrinho-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Cabeçalho e células da tabela */
+.carrinho-tabela th, .carrinho-tabela td {
+    padding: 18px 15px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+/* Cabeçalho da tabela */
+.carrinho-tabela th {
+    background-color: #f8f8f8;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Informações do produto */
+.produto-info {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+/* Imagem do produto */
+.produto-imagem {
+    max-width: 100px;
+    margin-right: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Detalhes do produto */
+.produto-detalhes {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+/* Nome do produto */
+.produto-nome {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 3px;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+/* Hover no nome do produto */
+.produto-nome:hover {
+    color: #007bff;
+}
+
+/* Preço e total */
+.preco, .total {
+    white-space: nowrap;
+    color: #008CBA;
+    font-weight: 600;
+}
+
+/* Valor total */
+.total-value {
+    text-align: left;
+    white-space: nowrap;
+    color: #008CBA;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+/* Quantidade */
+.quantidade {
+    text-align: center;
+}
+
+/* Área de finalização da compra */
+.finalizar-compra {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+/* Botões de continuar comprando e finalizar pedido */
+.continuar-comprando, .finalizar-pedido {
+    padding: 14px 35px;
+    text-decoration: none;
+    margin: 0 18px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão de continuar comprando */
+.continuar-comprando {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+/* Hover no botão de continuar comprando */
+.continuar-comprando:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+/* Botão de finalizar pedido */
+.finalizar-pedido {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+/* Hover no botão de finalizar pedido */
+.finalizar-pedido:hover {
+    background-color: #0077B3;
+    transform: translateY(-2px);
+}
+
+/* Linha do total */
+.total-row {
+    text-align: right;
+    
+    padding-right: 15px;
+}
+
+/* Label do total */
+.total-label {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+/* Link de remover item */
+.remover-item {
+    color: #d9534f;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/* Hover no link de remover item */
+.remover-item:hover {
+    color: #c9302c;
+}
+
+
+/* Mensagem de carrinho vazio */
+.carrinho-vazio-mensagem {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Botão de continuar comprando */
+.continuar-comprando-vazio {
+    padding: 14px 35px;
+    text-decoration: none;
+    margin: 20px auto; /* Centralizar o botão */
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #007bff;
+    color: white;
+    border: none;
+    display: inline-block; /* Permitir centralização */
+}
+
+/* Hover no botão de continuar comprando */
+.continuar-comprando-vazio:hover {
+    background-color: #0077B3;
+    transform: translateY(-2px);
+}

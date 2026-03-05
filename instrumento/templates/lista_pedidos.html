@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/lista_pedidos.css' %}">
+
+    <div class="container-table">
+        <h1>Lista de Pedidos</h1>
+        <div class="table-responsive">
+        {% if pedidos %}  
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID do Pedido</th>
+                        <th>Cliente</th>
+                        <th>Data do Pedido</th>
+                        <th>Valor Total</th>
+                        <th>Status do Pedido</th>
+                        <th>Status do Pagamento</th>
+                        <th>Meio de Pagamento</th>
+                        <th>Código de Transação</th>
+                        <th>Data do Pagamento</th>
+                        <th>Nome do Pagador</th>
+                        <th>Sobrenome</th>
+                        <th>Email</th>
+                        <th>CPF</th>
+                        <th>CEP</th>
+                        <th>Rua</th>
+                        <th>Número</th>
+                        <th>Complemento</th>
+                        <th>CEP</th>
+                        <th>Rua</th>
+                        <th>Número</th>
+                        <th>Complemento</th>
+                        <th>Bairro</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in pedidos %}
+                        <tr>
+                            <td>{{ pedido.id }}</td>
+                            <td>{{ pedido.cliente.nome_completo }}</td>
+                            <td>{{ pedido.data_pedido|date:"d/m/Y" }}</td>
+                            <td class="valor-total" data-valor="{{ pedido.valor_total }}"></td>
+                            <td>{{ pedido.status }}</td>
+                            <td>{{ pedido.status_pagamento }}</td>
+                            <td>{{ pedido.meio_pagamento |default:"Não informado"}}</td>
+                            <td>{{ pedido.codigo_transacao|default:"Não informado" }}</td>
+                            <td>{{ pedido.data_pagamento|date:"d/m/Y"|default:"Não informado" }}</td>
+                            <td>{{ pedido.nome_pagador|default:"Não informado" }}</td>
+                            <td>{{ pedido.sobrenome_pagador|default:"Não informado" }}</td>
+                            <td>{{ pedido.email_pagador|default:"Não informado" }}</td>
+                            <td>{{ pedido.cpf_pagador|default:"Não informado" }}</td>
+                            <td>{{ pedido.cep_pagador|default:"Não informado" }}</td>
+                            <td>{{ pedido.rua_pagador|default:"Não informado" }}</td>
+                            <td>{{ pedido.numero_pagador|default:"Não informado" }}</td>
+                            <td>{{ pedido.complemento_pagador|default:"Não informado" }}</td>
+                            <td>{{ pedido.cep_entrega|default:"Não informado" }}</td>
+                            <td>{{ pedido.rua_entrega|default:"Não informado" }}</td>
+                            <td>{{ pedido.numero_entrega|default:"Não informado" }}</td>
+                            <td>{{ pedido.complemento_entrega|default:"Não informado" }}</td>
+                            <td>{{ pedido.bairro_entrega|default:"Não informado" }}</td>
+                            <td>{{ pedido.cidade_entrega|default:"Não informado" }}</td>
+                            <td>{{ pedido.estado_entrega|default:"Não informado" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+        <p>Você não possui pedidos.</p>
+        {% endif %}       
+        </div>
+    </div>
+
+    <script>
+        const valores = document.querySelectorAll('.valor-total');
+        valores.forEach(valor => {
+            const valorNumerico = parseFloat(valor.dataset.valor);
+            const valorFormatado = valorNumerico.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            valor.textContent = valorFormatado;
+        });
+    </script>
+{% endblock %}
+
+{% block modal %}
+    {% if not request.user.is_authenticated %}
+        <div id="login-modal" class="modal" style="display: block;">
+            <div class="modal-content">
+                <h2>Faça Login</h2>
+                <p>
+                    Você precisa estar logado para visualizar seus pedidos.
+                </p>
+                <div class="modal-buttons">
+                    <a href="{% url 'login' %}" class="btn-submit">Login</a>
+                    <a href="{% url 'homepage' %}" class="btn-cancel-p">Voltar</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

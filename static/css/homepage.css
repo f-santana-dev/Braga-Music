@@ -1,0 +1,286 @@
+/* homepage.css */
+
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #f4f4f4;
+    margin: 0; /* Remover a margem padrão do body */
+    padding: 0; /* Remover o padding padrão do body */
+}
+
+.container {
+    display: flex;
+    
+    width: 100%; /* Ajustar para 100% em telas maiores */
+    margin: 5px auto;
+    
+    /* Remover max-width: 1700px; */
+    /* remover padding: 0 1px*/
+
+}
+
+
+
+
+.filter-sidebar {
+    width: 250px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+.filter-sidebar h3 {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-group h4 {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.filter-group ul {
+    list-style: none;
+}
+
+.filter-group li {
+    margin-bottom: 8px;
+}
+
+.filter-group li label {
+    margin-left: 5px;
+}
+
+/* Estilos para o filtr de categoria */
+.filter-group-categoria {
+    margin-bottom: 20px;
+}
+
+.filter-group-categoria h4 {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.filter-group-categoria ul {
+    list-style: none;
+}
+
+.filter-group-categoria li {
+    margin-bottom: 8px;
+}
+
+.filter-group-categoria li a {
+    text-decoration: none;
+    color: inherit; /* Mantém a mesma cor do texto */
+}
+
+.filter-group-categoria li a:visited { /* Estilos para links visitados */
+    color: inherit; /* Mantém a mesma cor do texto */
+}
+
+
+.filter-group-categoria li label {
+    margin-left: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.product-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+
+.product {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    min-width: 250px; /* Aumente este valor para aumentar a largura mínima */
+}
+
+.product:hover {
+    transform: translateY(-5px);
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.product h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.product p {
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+    align-items: center;
+}
+
+.page-link {
+    padding: 10px 15px;
+    margin: 0 5px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.page-link:hover {
+    background-color: #0056b3;
+}
+
+.page-link.disabled {
+    background-color: #ccc;
+    pointer-events: none;
+}
+
+.current-page {
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+.no-results {
+    text-align: center;
+    font-size: 1.2em;
+    color: #666;
+    margin-top: 20px;
+}
+
+
+
+/* Estilos adicionais para o filtro de preço */
+/* .price-filter {
+    margin-top: 10px;
+}
+
+.price-filter {
+    margin-top: 10px;
+}
+
+.price-range {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+} */
+
+
+#slider-range {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#slider-range .ui-slider-handle {
+    background: #007bff; /* Cor do "botão" do slider */
+    border: 1px solid #0056b3; /* Borda do "botão" do slider */
+    width: 1.2em;
+    height: 1.2em;
+    top: -0.3em;
+    margin-left: -0.6em;
+}
+
+#slider-range .ui-slider-range {
+    background: #cae5ee; /* Cor da barra selecionada */
+    border: 1px solid #46b8da; /* Borda da barra selecionada */
+}
+
+#slider-range .ui-widget-content {
+    border: 1px solid #ccc; /* Borda da barra de fundo */
+    background: #eee; /* Cor de fundo da barra de fundo */
+    height: 0.5em;
+}
+
+#amount {
+    margin-top: 10px;
+    text-align: center;
+    color: #333;
+    font-weight: normal;
+}
+
+
+
+
+.btn-clear-filters {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.btn-clear-filters:hover {
+    background-color: #0056b3;
+}
+
+/* Responsividade */
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 95%;
+    }
+
+    .filter-sidebar {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas menores */
+    }
+}
+

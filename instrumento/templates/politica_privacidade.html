@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="privacy-modal" class="modal" style="display: block;">
+        <div class="modal-content">
+            <h2>Política de Privacidade</h2>
+            <p>
+                Sua privacidade é importante para nós. Esta política explica como
+                coletamos, usamos e protegemos suas informações pessoais.
+            </p>
+            <h3>1. Coleta de Dados</h3>
+            <p>
+                Coletamos seu nome, e-mail, CPF e telefone para identificação
+                e contato. Nenhuma informação será compartilhada sem seu consentimento.
+            </p>
+            <h3>2. Uso das Informações</h3>
+            <p>
+                Utilizamos seus dados para melhorar a experiência do usuário
+                e oferecer suporte adequado. Seus dados estão seguros conosco.
+            </p>
+            <h3>3. Segurança</h3>
+            <p>
+                Implementamos medidas de segurança para proteger suas informações.
+                No entanto, nenhum sistema é 100% seguro.
+            </p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="modal-buttons">
+                    <button type="submit" name="aceitar_politica" class="btn-submit">Concordo</button>
+                    <button type="submit" class="btn-cancel-p">Voltar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,137 @@
+<!-- instrumento/templates/homepage.html -->
+ 
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+    <title>BragaMusics</title>
+</head>
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+    <div class="container">
+        <aside class="filter-sidebar">
+            <h3>Filtros</h3>
+
+            <div class="filter-group">
+                <h4>Categorias</h4>
+                <ul>
+                    {% for categoria in categorias %}
+                        <li>
+                            <a href="?categoria={{ categoria.id }}" class="categoria-filter {% if categoria.id|stringformat:'s' == categoria_id_selecionada %}active{% endif %}" data-categoria-id="{{ categoria.id }}">{{ categoria.nome }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <h4>Marcas</h4>
+                <ul>
+                    {% for marca in marcas %}
+                        <li>
+                            <input type="checkbox" id="marca-{{ marca.id }}" name="marca" value="{{ marca.id }}" class="marca-filter" {% if marca.id|stringformat:'s' in marcas_ids_selecionadas %}checked{% endif %} />
+                            <label for="marca-{{ marca.id }}">{{ marca.nome }}</label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <h4>Cores</h4>
+                <ul>
+                    {% for cor in cores %}
+                        <li>
+                            <input type="checkbox" id="cor-{{ cor }}" name="cor" value="{{ cor }}" class="cor-filter" {% if cor in cores_selecionadas %}checked{% endif %} />
+                            <label for="cor-{{ cor }}">{{ cor }}</label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <h4>Preço</h4>
+                <div class="price-filter">
+                    <div id="slider-range"></div>
+                    <p>
+                        <label for="amount">Intervalo de preço:</label>
+                        <input type="text" id="amount" readonly style="border: 0; color: #f6931f; font-weight: bold" />
+                    </p>
+                </div>
+            </div>
+
+            <button class="btn-clear-filters">Limpar Filtros</button>
+        </aside>
+
+        <section class="product-list">
+            {% include 'product_list.html' %}
+        </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#slider-range").slider({
+                range: true,
+                min: {{ preco_minimo_global }},
+                max: {{ preco_maximo_global }},
+                values: [{{ preco_min_selecionado|default:preco_minimo_global }}, {{ preco_max_selecionado|default:preco_maximo_global }}],
+                slide: function (event, ui) {
+                    $("#amount").val(formatCurrency(ui.values[0]) + " - " + formatCurrency(ui.values[1]));
+                },
+                stop: function(event, ui) {
+                    applyFilters();
+                }
+            });
+            $("#amount").val(formatCurrency($("#slider-range").slider("values", 0)) + " - " + formatCurrency($("#slider-range").slider("values", 1)));
+        });
+    
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+        }
+    
+        function applyFilters() {
+            let categoriaId = $('.categoria-filter.active').data('categoria-id');
+            let marcas = $('.marca-filter:checked').map(function() { return this.value; }).get();
+            let cores = $('.cor-filter:checked').map(function() { return this.value; }).get();
+            let precoMin = $("#slider-range").slider("values", 0);
+            let precoMax = $("#slider-range").slider("values", 1);
+    
+            let url = '?';
+            if (categoriaId) url += 'categoria=' + categoriaId + '&';
+            if (marcas.length > 0) marcas.forEach(marca => url += 'marca=' + marca + '&');
+            if (cores.length > 0) cores.forEach(cor => url += 'cor=' + cor + '&');
+            url += 'preco_min=' + precoMin + '&preco_max=' + precoMax;
+    
+            // Remove o último '&' se existir
+            if (url.endsWith('&')) {
+                url = url.slice(0, -1);
+            }
+    
+            window.location.href = url;
+        }
+    
+        $('.categoria-filter').click(function(e) {
+            e.preventDefault();
+            $('.categoria-filter').removeClass('active');
+            $(this).addClass('active');
+            applyFilters();
+        });
+    
+        $('.marca-filter, .cor-filter').change(function() {
+            applyFilters();
+        });
+    
+        $('.btn-clear-filters').click(function() {
+            $('.categoria-filter').removeClass('active');
+            $('.marca-filter, .cor-filter').prop('checked', false);
+            $("#slider-range").slider("values", [{{ preco_minimo_global }}, {{ preco_maximo_global }}]);
+            $("#amount").val(formatCurrency({{ preco_minimo_global }}) + " - " + formatCurrency({{ preco_maximo_global }}));
+    
+            // Limpar a URL removendo os parâmetros de filtro
+            window.location.href = '?';
+        });
+    </script>
+{% endblock %}

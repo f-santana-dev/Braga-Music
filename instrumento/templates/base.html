@@ -1,0 +1,206 @@
+<!-- instrumento/templates/base.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>BragaMusics</title>
+   
+   
+</head>
+<body>
+       
+    <header> 
+        <div class="top-header">
+            <a href="https://www.linkedin.com/in/francisco-braga-80572a14b/" target="_blank">
+                    <i class="fab fa-linkedin" style="font-size: 20px; vertical-align: middle;"></i>
+                    Linkedin
+            </a>
+
+            <div class="security-container" style="position: relative; display: inline-block;">
+               
+                <i class="fa-solid fa-lock-keyhole"></i>
+                <i class="fa-solid fa-lock-keyhole" style="font-size: 20px; position: absolute; top: 10px; left: 10px; color: black;"></i>
+              </div>
+              
+              <div class="security">
+                </div>
+
+            <div class="support" onclick="toggleDropdown()">
+                <i class="fas fa-user"></i> Canais de Atendimento ▼
+                <div class="dropdown" id="dropdown-menu">
+                    <ul>
+                        <li><strong>Contato:</strong> (92) 99988-9392 <i class="fab fa-whatsapp"></i></li>
+                        <li><strong>Contato:</strong> (92) 99988-9392 <i class="fab fa-whatsapp"></i></li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="fab fa-instagram" style="font-size: 20px; vertical-align: middle;"></i>
+                                Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="fab fa-facebook" style="font-size: 20px; vertical-align: middle;"></i>
+                                Facebook
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header">
+            <div class="logo">
+               <h1>BragaMusics</h1> 
+              
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Olá, o que você procura?">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+                     
+                  
+            
+            
+            <div class="user-actions">
+                <div class="user-info">
+                    <img src="{% static 'img/user-placeholder.png' %}" alt="Usuário" class="user-image">
+                    {% if user.is_authenticated %}
+                        <ul class="login-list">
+                            {% comment %} <li class="login-line-1">Olá, {{ user.nome_completo }}!</li> {% endcomment %}
+                            <li class="login-line-1">Olá, {{ user.primeiro_nome }}!</li>
+                            <li class="login-line-3">
+                                <form method="post" action="{% url 'logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit"class="logout-button">Sair</button>
+                                </form>
+                            </li>
+                        </ul>
+                    {% else %}
+                        <ul class="login-list">
+                            <li class="login-line-1">Olá!</li>
+                            <li class="login-line-2">
+                                <a href="{% url 'login' %}">Fazer Login</a>
+                            </li>
+                            <li class="login-line-3">ou <a href="{% url 'cadastro_cliente' %}">cadastrar-se</a></li>
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="icons">
+                   
+                    <div class="cart">
+                        <div class="badge-item">
+                            <div class="notify-badge" id="badge-full">
+                                {% if request.session.total_itens > 0 %}
+                                    {{ request.session.total_itens }}
+                                {% else %}
+                                    0
+                                {% endif %}
+                            </div>
+                            <div class="notify-badge" id="badge-empty">
+                                {% if request.session.total_itens == 0 %}
+                                    0
+                                {% else %}
+                                    {{ request.session.total_itens }}
+                                {% endif %}
+                            </div>
+                            <div class="cart">
+                                <a href="{% url 'carrinho' %}">
+                                    <div class="badge-item">
+                                        <img id="img-carrinhoCompras" src="{% static 'img/carrinhoCompras.png' %}" width="40" height="36" alt="Imagem carrinho compras" loading="eager">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                   
+                
+                </div>
+            </div>
+        
+        
+        
+        </div>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="{% url 'homepage' %}" class="no-link-style"><i class="fas fa-home"></i>Homepage</a></li>
+                {% comment %} <li>Kits BragaMusics</li> {% endcomment %}
+              
+
+                <li><a href="{% url 'homepage' %}?categoria=1" class="no-link-style">Violões</a></li>
+               
+                </li>
+                <li><a href="{% url 'homepage' %}?categoria=2" class="no-link-style"></i>Guitarras</a></li>
+                <li>Acessórios</li>                                         
+                <li>Novidades</li>
+                <li><a href="{% url 'lista_pedidos' %}" class="no-link-style"><i class="fas fa-bars"></i>Meus Pedidos</a></li>
+               
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="main-content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Institucional</h3>
+                <ul>
+                    <li><a href="#">Quem Somos</a></li>
+                    <li><a href="#">Trabalhe Conosco</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Atendimento</h3>
+                <ul>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Suporte ao Cliente</a></li>
+                </ul>
+            </div>
+            <div class="footer-section ofertas">
+                <h3>Ofertas Exclusivas</h3>
+                <p>Assine nossa newsletter:</p>
+                <input type="email" placeholder="Digite seu e-mail">
+                <button>INSCREVA-SE</button>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 BragaMusics. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown() {
+            var dropdown = document.getElementById("dropdown-menu");
+            dropdown.classList.toggle("show");
+        }
+
+        document.addEventListener("click", function (event) {
+            var dropdown = document.getElementById("dropdown-menu");
+            var support = document.querySelector(".support");
+
+            if (!support.contains(event.target)) {
+                dropdown.classList.remove("show");
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+<!-- 92 98117-3851-->

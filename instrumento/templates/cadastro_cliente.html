@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/cadastro_cliente.css' %}" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div class="form-container">
+    <h2>Cadastro de Cliente</h2>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if form.errors %}
+    <div class="error">
+        <p>Por favor, corrija os erros abaixo:</p>
+        <ul>
+            {% for field in form %}
+            {% for error in field.errors %}
+            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+            {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="section">
+            <h3>Informações Pessoais</h3>
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label for="id_nome_completo">Nome Completo:</label>
+                    {{ form.nome_completo }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_email">E-mail:</label>
+                    {{ form.email }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_cpf">CPF:</label>
+                    {{ form.cpf }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_telefone">Telefone:</label>
+                    {{ form.telefone }}
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Endereço</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="id_cep">CEP:</label>
+                    <div class="cep-input">
+                        {{ form.cep }}
+                        <button type="button" id="buscar-cep" class="cep-button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="id_endereco">Endereço:</label>
+                    {{ form.endereco }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_numero">Número:</label>
+                    {{ form.numero }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_complemento">Complemento:</label>
+                    {{ form.complemento }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_bairro">Bairro:</label>
+                    {{ form.bairro }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_cidade">Cidade:</label>
+                    {{ form.cidade }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_estado">Estado:</label>
+                    {{ form.estado }}
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Autenticação</h3>
+            <div class="form-grid">
+                <div class="form-group password-group">
+                    <label for="id_password1">Senha:</label>
+                    {{ form.password1 }}
+                </div>
+
+                <div class="form-group password-group">
+                    <label for="id_password2">Confirme a Senha:</label>
+                    {{ form.password2 }}
+                </div>
+            </div>
+        </div>
+
+        <div class="section consent-section">
+            <div class="form-group">
+                <label for="consentimento">
+                    <input type="checkbox" name="consentimento" id="consentimento" required />
+                    Concordo com o uso dos meus dados conforme a
+                    <a href="#" id="open-privacy-policy">política de privacidade</a>.
+                </label>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="btn-submit">Cadastrar</button>
+            <button type="button" class="btn-cancel">Cancelar</button>
+        </div>
+    </form>
+</div>
+<div id="privacy-modal" class="modal">
+    <div class="modal-content">
+        <h2>Política de Privacidade</h2>
+        <p>
+            Sua privacidade é importante para nós. Esta política explica como
+            coletamos, usamos e protegemos suas informações pessoais.
+        </p>
+        <h3>1. Coleta de Dados</h3>
+        <p>
+            Coletamos seu nome, e-mail, CPF e telefone para identificação
+            e contato. Nenhuma informação será compartilhada sem seu consentimento.
+        </p>
+        <h3>2. Uso das Informações</h3>
+        <p>
+            Utilizamos seus dados para melhorar a experiência do usuário
+            e oferecer suporte adequado. Seus dados estão seguros conosco.
+        </p>
+        <h3>3. Segurança</h3>
+        <p>
+            Implementamos medidas de segurança para proteger suas informações.
+            No entanto, nenhum sistema é 100% seguro.
+        </p>
+
+        <div class="modal-buttons">
+            <button id="agree-privacy" class="btn-submit">Concordo</button>
+            <button id="close-privacy" class="btn-cancel-p">Voltar</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#id_cpf").mask("000.000.000-00");
+        $("#id_telefone").mask("(00) 00000-0000");
+        $("#id_cep").mask("00000-000");
+
+        $("#id_cep").blur(function () {
+            let cep = $(this).val().replace(/\D/g, '');
+
+            if (cep != "") {
+                let validacep = /^[0-9]{8}$/;
+
+                if (validacep.test(cep)) {
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+                        if (!("erro" in dados)) {
+                            $("#id_endereco").val(dados.logradouro);
+                            $("#id_bairro").val(dados.bairro);
+                            $("#id_cidade").val(dados.localidade);
+                            $("#id_estado").val(dados.uf);
+                            $("#id_complemento").val(dados.complemento);
+                        } else {
+                            alert("CEP não encontrado.");
+                        }
+                    });
+                } else {
+                    alert("Formato de CEP inválido.");
+                }
+            }
+        });
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.getElementById("privacy-modal");
+        const openBtn = document.getElementById("open-privacy-policy");
+        const closeBtn = document.getElementById("close-privacy");
+        const agreeBtn = document.getElementById("agree-privacy");
+        const consentCheckbox = document.getElementById("consentimento");
+
+        openBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            modal.style.display = "block";
+        });
+
+        closeBtn.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        agreeBtn.addEventListener("click", function () {
+            consentCheckbox.checked = true;
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    });
+</script>
+{% endblock %}

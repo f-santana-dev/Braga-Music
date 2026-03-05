@@ -1,0 +1,49 @@
+<!--compra_concluida.html-->
+
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Compra Concluída{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/compra_concluida.css' %}">
+<div class="compra-concluida-container">
+    <div class="compra-concluida-conteudo">
+        <h1 class="compra-concluida-titulo">Compra Concluída</h1>
+
+        {% if status == 'approved' %}
+            <div class="compra-concluida-detalhes">
+                <h2 class="compra-concluida-subtitulo">Detalhes do Pedido:</h2>
+
+                <p class="compra-concluida-texto"><strong>ID do Pedido:</strong> {{ pedido.id }}</p>
+                <p class="compra-concluida-texto"><strong>Data do Pedido:</strong> {{ pedido.data_pedido }}</p>
+                {% comment %} <p class="compra-concluida-texto"><strong>Valor Total:</strong> {{ pedido.valor_total }}</p> {% endcomment %}
+               
+               
+                <p class="compra-concluida-texto"><strong>Valor Total:</strong> R$ {{ pedido.valor_total|intcomma }}</p>
+              
+              
+              
+                <p class="compra-concluida-texto"><strong>Status do Pagamento:</strong> Aprovado</p>
+
+                <h2 class="compra-concluida-subtitulo">Itens do Pedido:</h2>
+                <ul class="compra-concluida-lista">
+                    {% for item in itens_pedido %}
+                        <li class="compra-concluida-item">{{ item.instrumento.nome }} x {{ item.quantidade }} - {{ item.preco_unitario }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% elif status == 'pending' %}
+            <p class="compra-concluida-pendente">Seu pagamento está pendente. Aguarde a confirmação.</p>
+        {% elif status == 'failed' %}
+            <p class="compra-concluida-falha">Ocorreu um erro ao processar seu pagamento. Por favor, tente novamente.</p>
+            {% if error_message %}
+                <p class="compra-concluida-erro"><strong>Mensagem de Erro:</strong> {{ error_message }}</p>
+            {% endif %}
+        {% endif %}
+
+        <a href="{% url 'homepage' %}" class="compra-concluida-botao">Voltar para a página inicial</a>
+    </div>
+</div>
+{% endblock %}

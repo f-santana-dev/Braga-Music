@@ -1,0 +1,28 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Erro no Pagamento{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/pagamento_erro.css' %}">
+    
+<div class="container-information">
+        <div class="card">
+            <h2>Seu cartão recusou o pagamento</h2>
+            <p>Operação #{{ payment_id }}</p>
+            <div class="icon">!</div>
+        </div>
+
+        <div class="action-card">
+            <h3>O que posso fazer?</h3>
+            <p>Use outro cartão ou outro meio de pagamento.</p>
+            <a href="{% url 'finalizar_pedido' %}">Pagar com outro meio</a>
+        </div>
+
+        <a href="{% url 'carrinho' %}" class="back-link">← Voltar para o site</a>
+    </div>
+{% endblock %}
+
+
+
+
+

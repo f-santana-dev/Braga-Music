@@ -1,0 +1,76 @@
+
+/* Estilos para a página de compra concluída */
+
+
+.compra-concluida-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.compra-concluida-conteudo {
+  max-width: 800px; /* Use max-width em vez de width */
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.compra-concluida-titulo {
+  color: #2ecc71;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.compra-concluida-subtitulo {
+  color: #333;
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+.compra-concluida-texto {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.compra-concluida-lista {
+  list-style: none;
+  padding: 0;
+}
+
+.compra-concluida-item {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.compra-concluida-pendente {
+  color: #e67e22;
+  font-weight: bold;
+}
+
+.compra-concluida-falha {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.compra-concluida-erro {
+  color: #e74c3c;
+}
+
+.compra-concluida-botao {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.compra-concluida-botao:hover {
+  background: #0056b3;
+}

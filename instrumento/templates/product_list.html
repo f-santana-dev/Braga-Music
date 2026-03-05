@@ -1,0 +1,35 @@
+
+{% load static %}
+{% if instrumentos %}
+    <div class="product-grid">
+        {% for instrumento in instrumentos %}
+            <div class="product">
+                <a href="{% url 'detalhe_instrumento' instrumento.id %}">
+                    {% if instrumento.imagens.first %}
+                        <img src="{{ instrumento.imagens.first.imagem.url }}" alt="{{ instrumento.nome }}" />
+                    {% else %}
+                        <img src="{% static 'img/default-image.jpg' %}" alt="Imagem não disponível" />
+                    {% endif %}
+                </a>
+                <h3>{{ instrumento.nome }}</h3>
+                <p>Preço: {{ instrumento.preco_formatado }}</p>
+                <p>Marca: {{ instrumento.marca }}</p>
+                <p>Categoria: {{ instrumento.categoria }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {% if instrumentos.has_previous %}
+            <a href="?page={{ instrumentos.previous_page_number }}" class="page-link">&lt;&lt; Anterior</a>
+        {% endif %}
+        <span class="current-page">Página {{ instrumentos.number }} de {{ instrumentos.paginator.num_pages }}</span>
+        {% if instrumentos.has_next %}
+            <a href="?page={{ instrumentos.next_page_number }}" class="page-link">Próxima &gt;&gt;</a>
+        {% endif %}
+    </div>
+{% else %}
+    <p class="no-results">Nenhum instrumento encontrado.</p>
+{% endif %}
+
+{% comment %} #lterei aqui! {% endcomment %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/pre-login.css' %}">
+<div class="container">
+
+    <div class="informations">
+        <h1> Faça Login ou cadastre-se</h1>
+            
+        <h3> Prezado cliente, para finalizar seu processo de compra de nossos produtos, é necesssário fazer login ou cadastrar-se em nosso sistema.</h3>
+    </div>
+
+
+    <div class="buttons">
+        <a href="{% url 'login' %}" class="go-to-login">Fazer Login ou cadastrar-se</a>
+        <a href="{% url 'homepage' %}" class="go-to-home">Voltar para a Homepage</a>
+    </div>
+
+</div>
+{% endblock%}

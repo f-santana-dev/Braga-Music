@@ -1,0 +1,453 @@
+/* base.css */
+/* Resetando estilos padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+/* Estilo do Cabeçalho Fixo */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: white;
+}
+
+/* Cabeçalho superior (segurança e canais de atendimento) */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    background-color: #f8f8f8;
+    font-size: 14px;
+}
+
+/* Segurança (ícone de certificado) */
+.security img {
+    height: 30px;
+}
+
+/* Atendimento ao cliente */
+.support {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #333;
+    position: relative; /* Tornar o elemento pai relativo */
+}
+
+/* Ícone de usuário */
+.support i {
+    font-size: 14px;
+}
+
+/* Cabeçalho principal (logo, pesquisa e ícones) */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0072CE;
+    padding: 15px 20px;
+    color: white;
+}
+
+
+.user-image {
+    width: 40px; /* Ajuste o tamanho da imagem */
+    height: 40px; /* Ajuste o tamanho da imagem */
+    margin-right: 10px;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    align-items: flex-start; /* Alinhamento vertical no topo */
+    margin-right: 20px;
+}
+
+
+.user-image {
+    font-size: 30px; /* Ajuste o tamanho do ícone */
+    margin-right: 10px;
+}
+
+
+
+
+.login-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    line-height: 1.2; /* Ajuste a altura da linha */
+}
+
+
+.login-line-1 {
+    font-size: 12px;
+}
+
+.login-line-2 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.login-line-2 a {
+    color: white;
+    text-decoration: none;
+}
+
+.login-line-3 {
+    font-size: 12px;
+}
+
+.login-line-3 a {
+    color: white;
+    text-decoration: none;
+}
+
+
+ .icons {
+    display: flex;
+    align-items: center;
+}
+
+.icons a {
+    margin-right: 15px; /* Espaçamento entre os ícones */
+}
+
+
+
+
+.cart {
+    position: relative;
+}
+
+
+.badge-item {
+    position: relative;
+}
+
+
+.notify-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #f0ad4e;
+    color: white;
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 50%;
+}
+
+
+#badge-empty {
+    display: none; /* Esconde o badge vazio inicialmente */
+}
+
+
+.logout-button {
+    background-color: #04458b; /* Cor de fundo azul */
+    color: white; /* Cor do texto branco */
+    padding: 2px 15px; /* Espaçamento interno */
+    border: none; /* Remove a borda padrão */
+    border-radius: 5px; /* Borda arredondada */
+    cursor: pointer; /* Muda o cursor para uma mãozinha */
+    font-size: 14px; /* Tamanho da fonte */
+    transition: background-color 0.3s ease; /* Transição suave na cor de fundo */
+    margin-top: 5px;
+}
+
+.logout-button:hover {
+    background-color: #0056b3; /* Cor de fundo mais escura no hover */
+}
+
+
+/* Logo */
+.logo h1 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Barra de pesquisa */
+.search-bar {
+    display: flex;
+    width: 40%;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-bar button i {
+    color: #0072CE;
+    font-size: 18px;
+}
+
+/* ️ Ações do usuário */
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.login {
+    font-size: 14px;
+}
+
+.login a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Ícones de usuário */
+.icons i {
+    font-size: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* Barra de navegação */
+.navbar {
+    background-color: #005a9e;
+    padding: 10px 0;
+}
+
+.navbar ul {
+    display: flex;    
+    justify-content: center;
+    align-items: baseline;
+    list-style: none; /* Adicionado para remover o marcador */
+}
+
+.navbar ul li {
+    color: white;
+    font-size: 14px;
+    padding: 1px 15px;
+    cursor: pointer;
+}
+
+.navbar ul li i {
+    margin-right: 5px;
+}
+
+/* Remove estilo de link */
+.no-link-style {
+    text-decoration: none;
+    color: inherit;
+}
+
+.no-link-style:visited {
+    color: inherit;
+}
+
+.no-link-style:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* 🟢 Botão de ofertas */
+.btn-ofertas {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Conteúdo Principal */
+main {
+    flex: 1;
+    padding-top: 180px;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.main-content {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Menu Dropdown (Canais de Atendimento) */
+.support {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #333;
+}
+
+.support i {
+    font-size: 14px;
+}
+
+/* Estilizando o dropdown */
+.dropdown {
+    position: absolute;
+    top: 30px;
+    left: -10px; /* Deslocar 10px para a esquerda */
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: none;
+    width: 400px;
+    z-index: 100;
+    padding: 1px;
+}
+
+
+.dropdown ul {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+.dropdown ul li {
+    padding: 5px;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown ul li:last-child {
+    border-bottom: none;
+}
+
+.dropdown ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.dropdown ul li a:hover {
+    background-color: #0072CE;
+    color: white;
+}
+
+/* Ativar o dropdown */
+
+.dropdown.show {
+    display: block;
+}
+
+
+/* Estilos do Rodapé */
+footer {
+    background-color: #005a9e;
+    color: white;
+    padding: 30px 20px;
+    font-size: 14px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Seções do rodapé */
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-section h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid white;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-section ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Seção de Newsletter */
+.ofertas input {
+    width: 80%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.ofertas button {
+    display: block;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+
+
+
+
+.ofertas button:hover {
+    background-color: #218838;
+}
+
+/* ⚫ Rodapé inferior */
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid white;
+    font-size: 12px;
+}
+

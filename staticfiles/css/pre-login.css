@@ -1,0 +1,85 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{    
+    background-color: #f4f4f4;    
+    margin: 0; /* Remover a margem padrão do body */
+    padding: 0; /* Remover o padding padrão do body */
+}       
+.container{
+    display: flex;
+    justify-content: center;
+    flex-direction:column ;
+    align-items: center;
+    height: 40vh;
+    justify-content: space-around;
+    background-color: rgb(240, 240, 243);
+    padding: 1px 10px;
+}   
+
+.informations{
+  
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.informations h1{   
+    color: #333;
+    margin-bottom: 30px;
+}
+.go-to-login{
+   
+    padding: 14px 35px;
+    text-decoration: none;
+    margin: 0 18px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+     
+}
+
+.go-to-login{
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.go-to-login:hover{
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05);
+}
+
+
+
+
+
+
+.go-to-home{
+   
+    padding: 14px 35px;
+    text-decoration: none;
+    margin: 0 18px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.go-to-home{
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.go-to-home:hover{
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05);
+}

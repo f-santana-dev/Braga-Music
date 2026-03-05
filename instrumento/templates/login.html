@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <div class="container">
+        <h1>IDENTIFICAÇÃO</h1>
+        <div class="form-columns">
+            <div class="column">
+                <form method="post" action="{% url 'login' %}"> {% csrf_token %}
+                    <h2>JÁ SOU CADASTRADO</h2>
+                    <label for="email-cpf-cadastrado" class="label-cadastrado">Digite seu E-mail:</label>
+                    <input type="text" id="email-cpf-cadastrado" class="input-cadastrado" name="email"> 
+                    <label for="senha-cadastrado" class="label-senha">Digite sua senha:</label>
+                    <input type="password" id="senha-cadastrado" class="input-senha" name="password"> 
+                    <a href="#" class="forgot-password">Esqueci minha senha</a>
+                    <button class="login-button" type="submit">ENTRAR</button> 
+                    <div class="remember-me">
+                        <input type="checkbox" id="lembrar" name="lembrar">
+                        <label for="lembrar">Me mantenha conectado</label>
+                    </div>
+                </form>
+            </div>
+            <div class="column_new_account">
+                <h2>SOU UM NOVO CLIENTE</h2>
+                <label for="email-cpf-novo" class="label-new">Digite seu E-mail ou CPF/CNPJ:</label>
+                <input type="text" id="email-cpf-novo" class="input-cadastrado" name="email-cpf-novo">
+                <div id="email-verification-message"></div> 
+                <div class="column-new-account-separator"></div>
+                <button id="verificar-email" class="login-register">CADASTRAR</button>
+                <div class="separator-bottom"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="privacy-modal" class="modal">
+        <div class="modal-content">
+            <h2>Política de Privacidade</h2>
+            <p>Sua privacidade é importante para nós. Esta política explica como coletamos, usamos e protegemos suas informações pessoais.</p>
+            <h3>1. Coleta de Dados</h3>
+            <p>Coletamos seu nome, e-mail, CPF e telefone para identificação e contato. Nenhuma informação será compartilhada sem seu consentimento.</p>
+            <h3>2. Uso das Informações</h3>
+            <p>Utilizamos seus dados para melhorar a experiência do usuário e oferecer suporte adequado. Seus dados estão seguros conosco.</p>
+            <h3>3. Segurança</h3>
+            <p>Implementamos medidas de segurança para proteger suas informações. No entanto, nenhum sistema é 100% seguro.</p>
+            <div class="modal-buttons">
+                <button id="agree-privacy" class="btn-submit">Concordo</button>
+                <button id="close-privacy" class="btn-cancel-p">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = document.getElementById("privacy-modal");
+            const openBtn = document.getElementById("open-modal");
+            const closeBtn = document.getElementById("close-privacy");
+            const agreeBtn = document.getElementById("agree-privacy");
+            const consentCheckbox = document.getElementById("accept");
+
+            // Função para abrir o modal
+            function openModal() {
+                modal.style.display = "block";
+            }
+
+            // Função para fechar o modal
+            function closeModal() {
+                modal.style.display = "none";
+            }
+
+            // Evento para abrir o modal ao clicar no link
+            if(openBtn){
+                openBtn.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    openModal();
+                });
+            }
+
+
+            // Evento para fechar o modal ao clicar no botão "Voltar" (Recusar)
+            if(closeBtn){
+                closeBtn.addEventListener("click", closeModal);
+            }
+
+
+            // Evento para concordar com a política e fechar o modal
+            if(agreeBtn){
+                agreeBtn.addEventListener("click", function () {
+                    if(consentCheckbox){
+                        consentCheckbox.checked = true;
+                    }
+
+                    closeModal();
+                });
+            }
+
+            // Evento para fechar o modal ao clicar fora do modal
+            window.addEventListener("click", function (event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $('#verificar-email').click(function() {
+                console.log("Botão cadastrar clicado!"); // Log para depuração
+                var email = $('#email-cpf-novo').val();
+                console.log("Email digitado:", email); // Log para depuração
+                $.ajax({
+                    url: '{% url "verificar_email" %}',
+                    data: {
+                        'email': email
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log("Resposta do servidor:", data); // Log para depuração
+                        if (data.exists) {
+                            $('#email-verification-message').html('<span style="color: red;">Este email já está cadastrado.</span>');
+                        } else {
+                            window.location.href = '{% url "cadastro_cliente" %}?email=' + email;
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error("Erro na requisição AJAX:", textStatus, errorThrown); // Log de erro
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

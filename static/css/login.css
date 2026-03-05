@@ -1,0 +1,355 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-columns {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 700px;
+}
+
+.column{
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 330px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 380px;
+}
+
+.column h2{
+
+    font-size: 18px;
+    margin-bottom: 20px; /* Margem padrão */
+    text-align: left;
+}
+
+.label-cadastrado,
+.label-senha
+ {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 0px; /* Margem padrão */
+}
+
+.input-cadastrado,
+.input-senha
+ {
+    width: calc(100% - 12px);
+    padding: 8px;
+    margin-top: 1px;
+    margin-bottom: 35px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.forgot-password {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #007bff;
+    text-align: left;
+}
+
+.privacy-policy {
+    font-size: 12px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.login-button{ 
+    width: 100%;
+    padding: 12px;
+    background-color: #d9ead3;
+    color: #333;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.login-button:hover,
+.cadastrar-button:hover {
+    background-color: #c2d6b4;
+}
+
+.remember-me {
+    display: flex;
+    align-items: baseline;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.remember-me label {
+    margin-left: 5px;
+}
+
+.column_new_account {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 330px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 380px;
+}
+
+.column_new_account h2 {
+    font-size: 18px;
+    margin-bottom: 35px; /* Margem padrão */
+    text-align: left;
+
+}
+.input-new{
+
+    width: calc(100% - 12px);
+    padding: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+
+}
+.column-new-account-separator{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 105px;
+
+}
+
+
+.login-register{
+    width: 100%;
+    padding: 12px;
+    background-color: #d9ead3;
+    color: #333;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1px; 
+}
+
+.separator-bottom {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 33px;
+}
+
+.label-new{
+    display: block;
+    font-size: 14px;
+    margin-bottom: -3px; /* Margem padrão */
+    margin-top: -20px;
+}
+
+
+
+
+/* Estilos do Modal */
+.modal {
+    display: none; /* Mantenha apenas esta linha */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.modal-content {
+    background-color: #f8f8f8;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.modal-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #555;
+    text-align: justify;
+}
+
+.modal-buttons {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.modal-buttons button {
+    padding: 12px 25px;
+    margin: 0 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#accept-privacy {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#accept-privacy:hover {
+    background-color: #45a049;
+}
+
+#reject-privacy {
+    background-color: #f44336;
+    color: white;
+}
+
+#reject-privacy:hover {
+    background-color: #d32f2f;
+}
+
+.privacy-policy {
+    display: flex;
+    align-items: flex-start; /* Alinha verticalmente */
+    gap: 5px;
+    margin-bottom: 20px; /* Adicionado para espaçamento */
+}
+
+.privacy-policy a {
+    color: #007bff; /* Cor padrão do link */
+    text-decoration: none; /* Remove sublinhado padrão */
+}
+
+.privacy-policy a:visited {
+    color: #007bff; /* Mantém a cor do link após ser visitado */
+}
+
+.privacy-policy input[type="checkbox"] {
+    margin-right: 5px; /* Adicionado para espaçamento */
+    
+}
+
+/* ==========================
+   Botões Gerais (Cadastro + Modal)
+   ========================== */
+   .button-container,
+   .modal-buttons {
+       display: flex;
+       justify-content: center;
+       margin-top: 20px;
+       gap: 20px; /* Espaçamento uniforme entre os botões */
+   }
+   
+   .btn-submit, .btn-cancel, .btn-cancel-p {
+       width: 180px; /* Tamanho fixo para todos os botões */
+       height: 50px; /* Mantém altura uniforme */
+       padding: 12px 20px;
+       border: none;
+       border-radius: 6px;
+       cursor: pointer;
+       font-size: 16px;
+       text-align: center;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       font-weight: bold;
+       transition: 0.3s ease-in-out;
+   }
+   
+   /* Estilo do botão "Cadastrar" e "Concordo" */
+   .btn-submit {
+       background-color: #007bff;
+       color: white;
+   }
+   
+   .btn-submit:hover {
+       background-color: #0056b3;
+       transform: scale(1.05);
+   }
+   
+   /* Estilo do botão "Cancelar" e "Voltar" */
+   .btn-cancel, .btn-cancel-p {
+       background-color: #dc3545;
+       color: white;
+   }
+   
+   .btn-cancel:hover, .btn-cancel-p:hover {
+       background-color: #c82333;
+       transform: scale(1.05);
+   }
+   
+   /* ==========================
+      Estilos do Modal
+      ========================== */
+   .modal {
+       display: none;
+       position: fixed;
+       z-index: 1000;
+       left: 0;
+       top: 0;
+       width: 100%;
+       height: 100%;
+       background-color: rgba(0, 0, 0, 0.5);
+   }
+   
+   .modal-content {
+       background-color: #fff;
+       padding: 20px;
+       width: 50%;
+       max-width: 600px;
+       margin: 10% auto;
+       border-radius: 8px;
+       text-align: center;
+       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+   }
+   
+   /* Botões dentro do modal */
+   .modal-buttons {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+   
+   

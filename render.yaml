@@ -1,0 +1,17 @@
+# services:
+#   - type: web
+#     name: seu-nome-do-app
+#     runtime: python
+#     buildCommand: |
+#       pip install -r requirements.txt
+#       python manage.py makemigrations
+#       python manage.py migrate
+#       python instrumento/management_users.py  # Executa o script para criar o superusuário
+#     startCommand: gunicorn BragaMusic.wsgi:application
+#     envVars:
+#       - key: SECRET_KEY
+#         generateValue: true
+#       - key: DATABASE_URL
+#         value: "postgresql://neondb_owner:npg_diYvCe3O0oBV@ep-wild-mud-a5rr9e9x-pooler.us-east-2.aws.neon.tech/bragamusic_db?sslmode=require"
+#       - key: DEBUG
+#         value: "False"  # ou "True" para depuração # ou "True" para depuração

@@ -1,0 +1,79 @@
+
+
+.container {
+    width: 400px;
+    padding: 30px;
+    background: linear-gradient(180deg, #f23d4f, #f23d4f 3.25em, #f23d4f 3.3125em, hsla(0, 0%, 100%, 0) 7.75em);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(252, 53, 53, 0.1);
+    text-align: center;
+    display: inline-block;
+    height: 450px;
+}
+
+.card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+}
+
+.card h2 {
+    color: #dc3545;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.card p {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.card .icon {
+    color: #dc3545;
+    font-size: 2em;
+    margin-top: 10px;
+}
+
+.action-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.action-card h3 {
+    margin-top: 0;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.action-card p {
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+
+.action-card a {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    width: 70%;
+    text-align: center;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #007bff;
+    margin-top: 20px;
+    font-size: 0.9em;
+}

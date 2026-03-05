@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Carrinho de Compras</title>
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/carrinho.css' %}">
+<div class="carrinho-container">
+    <h1 class="carrinho-titulo">Carrinho de Compras</h1>
+
+    {% if itens_carrinho %}
+    <table class="carrinho-tabela">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Total</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in itens_carrinho %}
+            <tr>
+                <td>
+                    <div class="produto-info">
+                        {% if item.imagem %}
+                        <img src="{{ item.imagem }}" alt="{{ item.nome }}" class="produto-imagem">
+                        {% endif %}
+                        <div class="produto-detalhes">
+                            <a href="{% url 'detalhe_instrumento' item.id %}" class="produto-nome">{{ item.nome }}</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="preco">{{ item.preco }}</td>
+                <td class="quantidade">{{ item.quantidade }}</td>
+                <td class="total">{{ item.total_item }}</td>
+                <td>
+                    <a href="{% url 'remover_do_carrinho' item.id %}" class="remover-item">Remover</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="total-label">Total</td>
+                <td class="total-value">{{ total_geral }}</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="finalizar-compra">
+        <a href="{% url 'homepage' %}" class="continuar-comprando">Continuar Comprando</a>
+        <a href="{% url 'finalizar_pedido' %}" class="finalizar-pedido">Finalizar Pedido</a>
+    </div>
+    {% else %}
+    
+        <p class="carrinho-vazio-mensagem">Seu carrinho está vazio.</p>
+        <a href="{% url 'homepage' %}" class="continuar-comprando-vazio">Continuar Comprando</a>
+    {% endif %}
+</div>
+{% endblock %}
