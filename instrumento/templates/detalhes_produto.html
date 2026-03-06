@@ -11,14 +11,14 @@
     <div class="produto-imagens">
         <div class="miniaturas">
             {% for imagem in instrumento.imagens.all %}
-            <img src="{{ imagem.imagem.url }}" class="miniatura" onclick="trocarImagem('{{ imagem.imagem.url }}')" alt="Imagem {{ forloop.counter }}">
+            <img src="{{ imagem.imagem.url }}" class="miniatura" onclick="trocarImagem(this.src)" alt="Imagem {{ forloop.counter }}" onerror="this.onerror=null;this.src='{% static 'img/guitar.png' %}';">
             {% endfor %}
         </div>
         <div class="imagem-principal">
             {% if instrumento.imagens.all %}
-            <img id="imagem-grande" src="{{ instrumento.imagens.first.imagem.url }}" alt="Imagem principal">
+            <img id="imagem-grande" src="{{ instrumento.imagens.first.imagem.url }}" alt="Imagem principal" onerror="this.onerror=null;this.src='{% static 'img/guitar.png' %}';">
             {% else %}
-            <img id="imagem-grande" src="{% static 'img/default-image.jpg' %}" alt="Imagem não disponível">
+            <img id="imagem-grande" src="{% static 'img/guitar.png' %}" alt="Imagem nao disponivel">
             {% endif %}
         </div>
     </div>
@@ -26,10 +26,8 @@
     <div class="produto-detalhes">
         <h2>{{ instrumento.nome }}</h2>
         <p><strong>Marca:</strong> {{ instrumento.marca }}</p>
-        <p><strong>Preço:</strong> <span class="preco-novo">{{ instrumento.preco_formatado }}</span></p>
+        <p><strong>Preco:</strong> <span class="preco-novo">{{ instrumento.preco_formatado }}</span></p>
         <a href="{% url 'adicionar_ao_carrinho' instrumento.id %}" class="btn-adicionar-carrinho">Adicionar ao carrinho</a>
-      
-
     </div>
 </main>
 
@@ -42,9 +40,9 @@
                     <div class="carousel-item">
                         <a href="{% url 'detalhe_instrumento' similar.id %}">
                             {% if similar.imagens.all %}
-                                <img src="{{ similar.imagens.first.imagem.url }}" alt="{{ similar.nome }}">
+                                <img src="{{ similar.imagens.first.imagem.url }}" alt="{{ similar.nome }}" onerror="this.onerror=null;this.src='{% static 'img/guitar.png' %}';">
                             {% else %}
-                                <img src="{% static 'img/default-image.jpg' %}" alt="Imagem não disponível">
+                                <img src="{% static 'img/guitar.png' %}" alt="Imagem nao disponivel">
                             {% endif %}
                         </a>
                         <p>{{ similar.nome }}</p>
@@ -96,7 +94,9 @@
         let currentIndex = 0;
 
         function updateCarousel() {
-            track.style.transform = `translateX(-${currentIndex * items[0].offsetWidth}px)`;
+            if (items.length) {
+                track.style.transform = `translateX(-${currentIndex * items[0].offsetWidth}px)`;
+            }
         }
 
         nextButton.addEventListener('click', () => {

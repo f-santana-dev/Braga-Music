@@ -1,4 +1,4 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block head %}
@@ -16,10 +16,10 @@
         <thead>
             <tr>
                 <th>Produto</th>
-                <th>PreÃ§o</th>
+                <th>Preco</th>
                 <th>Quantidade</th>
                 <th>Total</th>
-                <th>AÃ§Ãµes</th>
+                <th>Acoes</th>
             </tr>
         </thead>
         <tbody>
@@ -28,7 +28,9 @@
                 <td>
                     <div class="produto-info">
                         {% if item.imagem %}
-                        <img src="{{ item.imagem }}" alt="{{ item.nome }}" class="produto-imagem">
+                        <img src="{{ item.imagem }}" alt="{{ item.nome }}" class="produto-imagem" onerror="this.onerror=null;this.src='{% static 'img/guitar.png' %}';">
+                        {% else %}
+                        <img src="{% static 'img/guitar.png' %}" alt="Imagem nao disponivel" class="produto-imagem">
                         {% endif %}
                         <div class="produto-detalhes">
                             <a href="{% url 'detalhe_instrumento' item.id %}" class="produto-nome">{{ item.nome }}</a>
@@ -58,8 +60,7 @@
         <a href="{% url 'finalizar_pedido' %}" class="finalizar-pedido">Finalizar Pedido</a>
     </div>
     {% else %}
-    
-        <p class="carrinho-vazio-mensagem">Seu carrinho estÃ¡ vazio.</p>
+        <p class="carrinho-vazio-mensagem">Seu carrinho esta vazio.</p>
         <a href="{% url 'homepage' %}" class="continuar-comprando-vazio">Continuar Comprando</a>
     {% endif %}
 </div>
