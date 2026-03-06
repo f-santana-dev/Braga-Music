@@ -10,6 +10,6 @@ urlpatterns = [
     path('', include('instrumento.urls')),
 ]
 
-# Em desenvolvimento, habilita arquivos de media para renderizar imagens dos produtos.
-if settings.DEBUG:
+# Em desenvolvimento e no modo demo do portfolio, habilita arquivos de media.
+if settings.DEBUG or settings.SERVE_MEDIA_IN_PROD:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
