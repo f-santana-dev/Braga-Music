@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.utils.text import slugify
+from django.templatetags.static import static
 
 import re
 from django.db import models
@@ -129,6 +130,101 @@ class Instrumento(models.Model):
         if not self.slug:
             self.slug = slugify(self.nome)
         super().save(*args, **kwargs)
+
+    @property
+    def eh_demo(self):
+        descricao = (self.descricao or "").lower()
+        nome = (self.nome or "").lower()
+        return "demo" in descricao or "demo" in nome
+
+    def _catalogo_demo_estatico(self):
+        # Usa imagens reais do repositorio para o modo demo no Render.
+        catalogo = {
+            "guitarra": [
+                "img/Guitarra_Aria_Pro_II_MAC-DLX_Stained_Brown.webp",
+                "img/Guitarra_Fender_Stratocaster_Aerodyne_Special_Bright_White.webp",
+                "img/Guitarra_Telecaster_Strinberg_SGS210T_Natural.webp",
+                "img/Guitarra_Yamaha_Pacifica_212VFM_Tobacco_Brown_Sunburst.webp",
+            ],
+            "violao": [
+                "img/Cavaquinho_gn80K2N.webp",
+                "img/guitarra2.webp",
+                "img/Guitarra_Telecaster_Strinberg_SGS210T_Natural.webp",
+                "img/Guitarra_Aria_Pro_II_MAC-DLX_Stained_Brown.webp",
+            ],
+            "baixo": [
+                "img/Guitarra_LP_Michael_Special_GML300_Black.webp",
+                "img/Guitarra_Tagima_TG-520_Black.webp",
+                "img/Guitarra_Strinberg_LPS280_Preta.webp",
+            ],
+            "bateria": [
+                "img/Guitarra_Tagima_TG-510_Candy_Apple.webp",
+                "img/Guitarra_Tagima_TG-520_Metallic_Gold_Yellow.webp",
+                "img/Guitarra_Fender_Telecaster_Special_Edition_Custom_FMT_HH_Crimson_Red.webp",
+            ],
+            "teclado": [
+                "img/Guitarra_Yamaha_Pacifica_212VFM_Tobacco_Brown_Sunburst.webp",
+                "img/Guitarra_Fender_Stratocaster_Aerodyne_Special_Bright_White.webp",
+                "img/Guitarra.webp",
+            ],
+            "percussao": [
+                "img/Cavaquinho_gn80K2N.webp",
+                "img/guitarra2.webp",
+                "img/Guitarra.webp",
+            ],
+            "sopro": [
+                "img/Guitarra_Aria_Pro_II_MAC-DLX_Stained_Brown.webp",
+                "img/Guitarra_Yamaha_Pacifica_212VFM_Tobacco_Brown_Sunburst.webp",
+                "img/Guitarra.webp",
+            ],
+            "acessorios": [
+                "img/Guitarra_Fender_Stratocaster_Aerodyne_Special_Bright_White.webp",
+                "img/Guitarra_Telecaster_Strinberg_SGS210T_Natural.webp",
+                "img/Guitarra_Aria_Pro_II_MAC-DLX_Stained_Brown.webp",
+            ],
+            "default": [
+                "img/Guitarra_Aria_Pro_II_MAC-DLX_Stained_Brown.webp",
+                "img/Guitarra_Telecaster_Strinberg_SGS210T_Natural.webp",
+                "img/Guitarra_Fender_Stratocaster_Aerodyne_Special_Bright_White.webp",
+                "img/guitarra2.webp",
+            ],
+        }
+        categoria = (self.categoria.nome or "").lower() if self.categoria_id else ""
+        return catalogo.get(categoria, catalogo["default"])
+
+    @property
+    def imagem_exibicao_url(self):
+        if not self.eh_demo:
+            primeira_imagem = self.imagens.first()
+            if primeira_imagem and primeira_imagem.imagem:
+                try:
+                    return primeira_imagem.imagem.url
+                except Exception:
+                    pass
+
+        opcoes = self._catalogo_demo_estatico()
+        return static(opcoes[self.id % len(opcoes)])
+
+    @property
+    def imagens_exibicao_urls(self):
+        if not self.eh_demo:
+            urls = []
+            for imagem in self.imagens.all():
+                if not imagem.imagem:
+                    continue
+                try:
+                    urls.append(imagem.imagem.url)
+                except Exception:
+                    continue
+            if urls:
+                return urls
+
+        opcoes = self._catalogo_demo_estatico()
+        deslocamento = self.id % len(opcoes)
+        urls = []
+        for indice in range(min(3, len(opcoes))):
+            urls.append(static(opcoes[(deslocamento + indice) % len(opcoes)]))
+        return urls
 
 
 class ImagemInstrumento(models.Model):

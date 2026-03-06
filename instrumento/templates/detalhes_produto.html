@@ -9,18 +9,20 @@
 <link rel="stylesheet" href="{% static 'css/detalhes_produto.css' %}">
 <main class="produto-container">
     <div class="produto-imagens">
+        {% with imagens=instrumento.imagens_exibicao_urls %}
         <div class="miniaturas">
-            {% for imagem in instrumento.imagens.all %}
-            <img src="{{ imagem.imagem.url }}" class="miniatura" onclick="trocarImagem(this.src)" alt="Imagem {{ forloop.counter }}" onerror="this.onerror=null;this.src='{% static 'img/guitar.png' %}';">
+            {% for imagem_url in imagens %}
+            <img src="{{ imagem_url }}" class="miniatura" onclick="trocarImagem(this.src)" alt="Imagem {{ forloop.counter }}" onerror="this.onerror=null;this.src='{% static 'img/guitar.png' %}';">
             {% endfor %}
         </div>
         <div class="imagem-principal">
-            {% if instrumento.imagens.all %}
-            <img id="imagem-grande" src="{{ instrumento.imagens.first.imagem.url }}" alt="Imagem principal" onerror="this.onerror=null;this.src='{% static 'img/guitar.png' %}';">
+            {% if imagens %}
+            <img id="imagem-grande" src="{{ imagens.0 }}" alt="Imagem principal" onerror="this.onerror=null;this.src='{% static 'img/guitar.png' %}';">
             {% else %}
             <img id="imagem-grande" src="{% static 'img/guitar.png' %}" alt="Imagem nao disponivel">
             {% endif %}
         </div>
+        {% endwith %}
     </div>
 
     <div class="produto-detalhes">
@@ -39,11 +41,7 @@
                 {% if similar.id != instrumento.id %}
                     <div class="carousel-item">
                         <a href="{% url 'detalhe_instrumento' similar.id %}">
-                            {% if similar.imagens.all %}
-                                <img src="{{ similar.imagens.first.imagem.url }}" alt="{{ similar.nome }}" onerror="this.onerror=null;this.src='{% static 'img/guitar.png' %}';">
-                            {% else %}
-                                <img src="{% static 'img/guitar.png' %}" alt="Imagem nao disponivel">
-                            {% endif %}
+                            <img src="{{ similar.imagem_exibicao_url }}" alt="{{ similar.nome }}" onerror="this.onerror=null;this.src='{% static 'img/guitar.png' %}';">
                         </a>
                         <p>{{ similar.nome }}</p>
                     </div>

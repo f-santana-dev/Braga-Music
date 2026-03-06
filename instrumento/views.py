@@ -543,16 +543,13 @@ def carrinho(request):
             preco_formatado = formatar_preco_real(preco)
             total_item_formatado = formatar_preco_real(total_item)
 
-            primeira_imagem = ImagemInstrumento.objects.filter(instrumento=instrumento).first()
-            imagem_url = primeira_imagem.imagem.url if primeira_imagem else None
-
             itens_carrinho.append({
                 'id': instrumento.id,
                 'nome': instrumento.nome,
                 'preco': preco_formatado,
                 'quantidade': quantidade,
                 'total_item': total_item_formatado,
-                'imagem': imagem_url,
+                'imagem': instrumento.imagem_exibicao_url,
             })
     else:
         logger.info(f"Usuário não autenticado. Sessão: {request.session.get('carrinho')}")
@@ -569,16 +566,13 @@ def carrinho(request):
                 preco_formatado = formatar_preco_real(preco)
                 total_item_formatado = formatar_preco_real(total_item)
 
-                primeira_imagem = ImagemInstrumento.objects.filter(instrumento=instrumento).first()
-                imagem_url = primeira_imagem.imagem.url if primeira_imagem else None
-
                 itens_carrinho.append({
                     'id': instrumento_id,
                     'nome': item['nome'],
                     'preco': preco_formatado,
                     'quantidade': quantidade,
                     'total_item': total_item_formatado,
-                    'imagem': imagem_url,
+                    'imagem': instrumento.imagem_exibicao_url,
                 })
             except Instrumento.DoesNotExist:
                 logger.error(f"Instrumento com ID {instrumento_id} não encontrado.")

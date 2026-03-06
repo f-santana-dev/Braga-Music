@@ -4,11 +4,7 @@
         {% for instrumento in instrumentos %}
             <div class="product">
                 <a href="{% url 'detalhe_instrumento' instrumento.id %}">
-                    {% if instrumento.imagens.first %}
-                        <img src="{{ instrumento.imagens.first.imagem.url }}" alt="{{ instrumento.nome }}" onerror="this.onerror=null;this.src='{% static 'img/guitar.png' %}';" />
-                    {% else %}
-                        <img src="{% static 'img/guitar.png' %}" alt="Imagem nao disponivel" />
-                    {% endif %}
+                    <img src="{{ instrumento.imagem_exibicao_url }}" alt="{{ instrumento.nome }}" onerror="this.onerror=null;this.src='{% static 'img/guitar.png' %}';" />
                 </a>
                 <h3>{{ instrumento.nome }}</h3>
                 <p>Preco: {{ instrumento.preco_formatado }}</p>
