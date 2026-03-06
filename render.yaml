@@ -6,6 +6,7 @@ services:
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
       python manage.py migrate
+      python manage.py bootstrap_catalogo_demo
     startCommand: gunicorn BragaMusic.wsgi:application
     envVars:
       - key: SECRET_KEY
@@ -20,6 +21,8 @@ services:
         fromDatabase:
           name: braga-music-db
           property: connectionString
+      - key: AUTO_SEED_DEMO
+        value: "True"
       - key: MERCADO_PAGO_PUBLIC_KEY
         sync: false
       - key: MERCADO_PAGO_ACCESS_TOKEN
